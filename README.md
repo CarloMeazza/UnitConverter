@@ -12,7 +12,7 @@ It's built using Flask for the backend and HTML/CSS/JavaScript for the frontend.
 
 1. **Clone the repository**: 
    ```bash
-   git clone https://github.com/yourusername/unit-converter.git
+   git clone https://github.com/CarloMeazza/UnitConverter.git
    ```
 2. **Navigate to the project directory**:
    ```bash
