@@ -1,3 +1,37 @@
+"""
+    This is a simple Flask application that provides a form for converting
+    lengths, weights and temperatures between different units of measurement.
+
+    The application uses the Flask-WTF extension to handle forms and the
+    WTForms library to define the form fields.
+
+    The application also uses the NumPy library to perform the conversions
+    between units of measurement.
+
+    The application is configured to use the SECRET_KEY configuration variable
+    to encrypt the CSRF token.
+
+    The application has three routes:
+
+    - The root route ("/") renders an HTML template with a form for each type
+      of conversion (length, weight, temperature).
+
+    - The "/length_conversion" route is a POST route that takes a JSON payload
+      with the value to convert, the initial unit of measurement and the
+      final unit of measurement. It returns a JSON response with the converted
+      value.
+
+    - The "/weight_conversion" route is a POST route that takes a JSON payload
+      with the value to convert, the initial unit of measurement and the
+      final unit of measurement. It returns a JSON response with the converted
+      value.
+
+    - The "/temp_conversion" route is a POST route that takes a JSON payload
+      with the value to convert, the initial unit of measurement and the
+      final unit of measurement. It returns a JSON response with the converted
+      value.
+"""
+
 from flask import Flask, render_template, request, jsonify
 from flask_wtf import FlaskForm
 from wtforms import FloatField, SelectField
@@ -28,6 +62,10 @@ temperature = [("C", "Celsius"), ("F", "Fahrenheit"), ("K", "Kelvin")]
 
 
 class LengthForm(FlaskForm):
+    """
+    A form for converting lengths between different units of measurement.
+    """
+
     from_number = FloatField(
         "from_number",
         validators=[DataRequired()],
@@ -49,6 +87,10 @@ class LengthForm(FlaskForm):
 
 
 class WeightForm(FlaskForm):
+    """
+    A form for converting weights between different units of measurement.
+    """
+
     from_number = FloatField(
         "from_number",
         validators=[DataRequired()],
@@ -73,6 +115,10 @@ class WeightForm(FlaskForm):
 
 
 class TempForm(FlaskForm):
+    """
+    A form for converting temperatures between different units of measurement.
+    """
+
     from_number = FloatField(
         "from_number",
         validators=[DataRequired()],
@@ -169,7 +215,8 @@ def temp_conversion():
 
 
 def convert_length_numpy(value, initial_unit, final_unit):
-    """Convert a length value from one unit to another using NumPy.
+    """
+    Convert a length value from one unit to another using NumPy.
 
     Args:
         value (float): The numerical value to convert.
@@ -201,7 +248,8 @@ def convert_length_numpy(value, initial_unit, final_unit):
 
 
 def convert_weight_numpy(value, initial_unit, final_unit):
-    """Convert a weight value from one unit to another using NumPy.
+    """
+    Convert a weight value from one unit to another using NumPy.
 
     Args:
         value (float): The numerical value to convert.
@@ -262,7 +310,3 @@ def convert_temperature(value, initial_unit, final_unit):
         return value + 273.15
     else:
         return value
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
